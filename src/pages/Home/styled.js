@@ -40,12 +40,6 @@ const Record = styled.div`
         .day{
             color: #C6C6C6;
         }
-        .green{
-            color: #03AC00
-        }
-        .red{
-            color: #C70000
-        }
         h3{
             position: absolute;
             bottom: 10px;

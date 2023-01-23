@@ -10,6 +10,10 @@ const Screen1 = styled.div`
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    form{
+        display: flex;
+        flex-direction: column;
+    }
     h1{
         font-family: 'Saira Stencil One';
         color: white;

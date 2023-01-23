@@ -10,6 +10,10 @@ const Screen2 = styled.div`
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
+    form{
+        display: flex;
+        flex-direction: column;
+    }
     h1{
         font-family: 'Raleway';
         font-style: normal;
