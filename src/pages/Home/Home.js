@@ -8,7 +8,10 @@ import { Header, Record, Incomes, AddCashFlow } from "./styled"
 export default function Home({ token, name }) {
     const config = { headers: { "Authorization": `Bearer ${token}` } }
     const [myCash, setMyCash] = useState([])
+    const [myBalance, setMyBalance] = useState([])
+    const [sum, setSum] = useState(undefined)
     const navigate = useNavigate()
+    let result = 0
 
     function logoff() {
         axios.delete(`${process.env.REACT_APP_API_URL}/home`, config)
@@ -19,9 +22,17 @@ export default function Home({ token, name }) {
 
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_API_URL}/home`, config)
-            .then(r => setMyCash(r.data))
-            .catch(err => console.log("error"))
-    }, [])
+            .then(r => {
+                setMyCash(r.data.cashflow)
+                setMyBalance(r.data.balance)
+                for(let i in myBalance){
+                    result = result + myBalance[i].value
+                }
+                setSum(result)
+            })
+            .catch(err => console.log(err))
+
+    }, [sum])
 
     return (
         <Screen2>
@@ -29,11 +40,11 @@ export default function Home({ token, name }) {
                 <h1>Olá, {name}</h1>
                 <ion-icon name="exit-outline" onClick={logoff}></ion-icon>
             </Header>
-            <Record>
+            <Record sum={sum}>
                 {myCash.length === 0 ? <h1>Não há registros de entrada ou saída</h1> : myCash.map(m => <MoneyDescription myCash={m} />)}
                 <div>
                     <h3>SALDO</h3>
-                    <h4>2849,96</h4>
+                    <h4>R$ {sum}</h4>
                 </div>
             </Record>
             <Incomes>

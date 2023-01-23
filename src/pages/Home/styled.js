@@ -59,7 +59,7 @@ const Record = styled.div`
             font-weight: 400;
             font-size: 17px;
             line-height: 20px;
-            color: #03AC00 //#C70000
+            color: ${props => props.sum > 0 ? '#03AC00' : '#C70000'}
         }
 
 
